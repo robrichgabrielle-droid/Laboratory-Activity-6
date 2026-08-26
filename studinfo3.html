@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Information</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <h1>Student Information</h1>
+    <hr />
+
+    <div id="output"></div>
+
+    <script>
+      class Student {
+        constructor(
+          studentID,
+          name,
+          course,
+          studentType,
+          yearLevel,
+          enrollmentStatus,
+          email,
+          section,
+          subjects,
+        ) {
+          this.studentID = studentID;
+          this.name = name;
+          this.course = course;
+          this.studentType = studentType;
+          this.yearLevel = yearLevel;
+          this.enrollmentStatus = enrollmentStatus;
+          this.email = email;
+          this.section = section;
+          this.subjects = subjects;
+        }
+
+        displayInfo() {
+          return `
+            <h2>${this.name}</h2>
+
+            <p><strong>Student ID:</strong> ${this.studentID}</p>
+            <p><strong>Name:</strong> ${this.name}</p>
+            <p><strong>Course:</strong> ${this.course}</p>
+            <p><strong>Student Type:</strong> ${this.studentType}</p>
+            <p><strong>Year Level:</strong> ${this.yearLevel}</p>
+            <p><strong>Enrollment Status:</strong> ${this.enrollmentStatus}</p>
+            <p><strong>Email:</strong> ${this.email}</p>
+            <p><strong>Section:</strong> ${this.section}</p>
+          `;
+        }
+
+        introduce() {
+          return `
+            <p>
+              <strong>The Introduce Method():</strong><br>
+              Hello! My name is ${this.name}.
+            </p>
+          `;
+        }
+
+        dotNotation() {
+          return `
+            <p>
+              <strong>Dot Notation:</strong><br>
+              Hello! My name is ${this.name}.
+              I am taking ${this.course}.
+            </p>
+          `;
+        }
+
+        bracketNotation() {
+          return `
+            <p>
+              <strong>Bracket Notation:</strong><br>
+              Hello! My name is ${this["name"]}.
+              I am taking ${this["course"]}.
+            </p>
+          `;
+        }
+
+        crudOperation() {
+          // CREATE
+          const studentRecord = {
+            id: this.studentID,
+            name: this.name,
+            course: this.course,
+            email: this.email,
+            section: this.section,
+          };
+
+          // READ
+          const originalName = studentRecord.name;
+          const originalEmail = studentRecord.email;
+
+          // UPDATE
+          let newName;
+
+          if (this.studentID === "2024-001") {
+            newName = "Ana Marie Santos";
+          } else if (this.studentID === "2024-002") {
+            newName = "Robert Uy";
+          } else if (this.studentID === "2024-003") {
+            newName = "Catherine Niel";
+          } else {
+            newName = this.name + " Updated";
+          }
+
+          // Actually update the student's name
+          this.name = newName;
+
+          // Update the CRUD record
+          studentRecord.name = this.name;
+
+          // Add updatedName property
+          studentRecord.updatedName = studentRecord.name;
+
+          // DELETE
+          delete studentRecord.email;
+
+          // Check if email still exists
+          let emailAfterDelete = "";
+
+          if ("email" in studentRecord) {
+            emailAfterDelete = studentRecord.email;
+          }
+
+          return `
+    <p>
+      <strong>CRUD Operation:</strong>
+    </p>
+
+    <p>
+      <strong>CREATE:</strong><br>
+      Student record created successfully.
+    </p>
+
+    <p>
+      <strong>READ:</strong><br>
+      Name: ${originalName}<br>
+      Email: ${originalEmail}
+    </p>
+
+    <p>
+      <strong>UPDATE:</strong><br>
+      Original Name: ${originalName}<br>
+      Updated Name: ${studentRecord.updatedName}
+    </p>
+
+    <p>
+      <strong>DELETE:</strong><br>
+      Email After Delete: ${emailAfterDelete}
+    </p>
+  `;
+        }
+
+        printNameAndSection() {
+          return `
+            <p>
+              <strong>Name and Section:</strong><br>
+              ${this.name} - ${this.section}
+            </p>
+          `;
+        }
+
+        printSubjects() {
+          let subjectList = "";
+
+          this.subjects.forEach((subject) => {
+            subjectList += `<li>${subject}</li>`;
+          });
+
+          return `
+            <p>
+              <strong>Subjects Enrolled:</strong>
+            </p>
+
+            <ul>
+              ${subjectList}
+            </ul>
+          `;
+        }
+
+        destructuringDemo() {
+          const { name: studentName, course: program } = this;
+
+          return `
+            <p>
+              <strong>Destructuring:</strong><br>
+              Student Name: ${studentName}<br>
+              Program: ${program}
+            </p>
+          `;
+        }
+
+        study() {
+          return `
+            <p>
+              <strong>The Study Method():</strong><br>
+              ${this.name} is studying ${this.course}.
+            </p>
+
+            <hr>
+          `;
+        }
+      }
+
+      class RegularStudent extends Student {
+        constructor(
+          studentID,
+          name,
+          course,
+          studentType,
+          yearLevel,
+          enrollmentStatus,
+          email,
+          section,
+          subjects,
+        ) {
+          super(
+            studentID,
+            name,
+            course,
+            studentType,
+            yearLevel,
+            enrollmentStatus,
+            email,
+            section,
+            subjects,
+          );
+        }
+
+        introduce() {
+          return `
+            <p>
+              <strong>The Introduce Method():</strong><br>
+              Hello! My name is ${this.name}.
+              I am a Regular Student taking ${this.course}.
+            </p>
+          `;
+        }
+      }
+
+      class IrregularStudent extends Student {
+        constructor(
+          studentID,
+          name,
+          course,
+          studentType,
+          yearLevel,
+          enrollmentStatus,
+          email,
+          section,
+          subjects,
+        ) {
+          super(
+            studentID,
+            name,
+            course,
+            studentType,
+            yearLevel,
+            enrollmentStatus,
+            email,
+            section,
+            subjects,
+          );
+        }
+
+        introduce() {
+          return `
+            <p>
+              <strong>The Introduce Method():</strong><br>
+              Hello! My name is ${this.name}.
+              I am an Irregular Student taking ${this.course}.
+            </p>
+          `;
+        }
+      }
+
+      class HonorStudent extends Student {
+        constructor(
+          studentID,
+          name,
+          course,
+          studentType,
+          yearLevel,
+          enrollmentStatus,
+          email,
+          section,
+          subjects,
+        ) {
+          super(
+            studentID,
+            name,
+            course,
+            studentType,
+            yearLevel,
+            enrollmentStatus,
+            email,
+            section,
+            subjects,
+          );
+        }
+
+        introduce() {
+          return `
+            <p>
+              <strong>The Introduce Method():</strong><br>
+              Hello! My name is ${this.name}.
+              I am an Honor Student taking ${this.course}.
+            </p>
+          `;
+        }
+      }
+
+      let student1 = new RegularStudent(
+        "2024-001",
+        "Ana Santos",
+        "BSIT",
+        "Regular",
+        "3rd Year",
+        "Active",
+        "anasantos@gmail.com",
+        "BSIT-3A",
+        ["Integrative Programming", "Advanced Mobile Programming"],
+      );
+
+      let student2 = new IrregularStudent(
+        "2024-002",
+        "Bob Uy",
+        "BSCS",
+        "Irregular",
+        "3rd Year",
+        "Active",
+        "bobuy@gmail.com",
+        "BSCS-3B",
+        ["Advanced Networking", "Database Systems"],
+      );
+
+      let student3 = new HonorStudent(
+        "2024-003",
+        "Cath Niel",
+        "BSN",
+        "Honor",
+        "3rd Year",
+        "Active",
+        "cathniel@gmail.com",
+        "BSN-3A",
+        ["Anaphy", "Anatomy"],
+      );
+
+      let students = [student1, student2, student3];
+      let output = document.getElementById("output");
+
+      students.forEach((student) => {
+        const studentCard = document.createElement("article");
+
+        studentCard.className = "student-card";
+        studentCard.innerHTML = `
+          <section class="profile-section">
+            ${student.displayInfo()}
+          </section>
+
+          <section class="method-grid">
+            <div class="method-block">
+              ${student.introduce()}
+            </div>
+            <div class="method-block">
+              ${student.dotNotation()}
+            </div>
+            <div class="method-block">
+              ${student.bracketNotation()}
+            </div>
+            <div class="method-block">
+              ${student.crudOperation()}
+            </div>
+            <div class="method-block">
+              ${student.printNameAndSection()}
+            </div>
+            <div class="method-block">
+              ${student.printSubjects()}
+            </div>
+            <div class="method-block">
+              ${student.destructuringDemo()}
+            </div>
+            <div class="method-block">
+              ${student.study()}
+            </div>
+          </section>
+        `;
+
+        output.appendChild(studentCard);
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,196 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap");
+
+:root {
+  --navy: #17324d;
+  --teal: #157a82;
+  --gold: #e4aa3b;
+  --ink: #263746;
+  --muted: #617180;
+  --paper: #ffffff;
+  --background: #edf5f6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 48px 24px 64px;
+  color: var(--ink);
+  font-family: "Nunito", "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #edf5f6 0%, #f8fbf8 52%, #e7f0f4 100%);
+}
+
+h1 {
+  max-width: 1180px;
+  margin: 0 auto 12px;
+  color: var(--navy);
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+body > hr {
+  max-width: 1180px;
+  height: 4px;
+  margin: 0 auto 32px;
+  border: 0;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--teal) 0 72%, var(--gold) 72% 100%);
+}
+
+#output {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  gap: 24px;
+  max-width: 1180px;
+  margin: 0 auto;
+  align-items: stretch;
+}
+
+.student-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  min-width: 0;
+  border: 1px solid #d8e4e7;
+  border-top: 6px solid var(--teal);
+  border-radius: 8px;
+  background: var(--paper);
+  box-shadow: 0 10px 24px rgb(23 50 77 / 10%);
+  animation: rise-in 500ms ease both;
+}
+
+.student-card:nth-child(2) {
+  border-top-color: var(--gold);
+  animation-delay: 100ms;
+}
+
+.student-card:nth-child(3) {
+  border-top-color: var(--navy);
+  animation-delay: 200ms;
+}
+
+.student-card h2 {
+  margin: 0;
+  padding: 0 0 16px;
+  color: var(--navy);
+  font-size: 1.65rem;
+}
+
+.profile-section {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 20px;
+  padding: 24px 22px 20px;
+}
+
+.profile-section h2 {
+  grid-column: 1 / -1;
+  border-bottom: 1px solid #d8e4e7;
+}
+
+.profile-section > p {
+  margin: 0;
+  padding: 8px 0;
+  line-height: 1.55;
+}
+
+.profile-section > p strong {
+  display: inline-block;
+  min-width: 132px;
+  color: var(--navy);
+}
+
+.student-card strong {
+  color: var(--teal);
+  font-weight: 800;
+}
+
+.method-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  flex: 1;
+  padding: 20px 22px 24px;
+  border-top: 1px solid #d8e4e7;
+  background: #f7faf9;
+}
+
+.method-block {
+  padding: 14px 16px;
+  border-left: 3px solid var(--teal);
+  border-radius: 4px;
+  background: var(--paper);
+}
+
+.method-block:nth-child(3n + 2) {
+  border-left-color: var(--gold);
+}
+
+.method-block:nth-child(3n) {
+  border-left-color: var(--navy);
+}
+
+.method-block:nth-child(4) {
+  grid-column: 1 / -1;
+}
+
+.method-block p {
+  margin: 0;
+  line-height: 1.55;
+}
+
+.method-block p + p {
+  margin-top: 10px;
+}
+
+.method-block ul {
+  margin: 8px 0 0;
+  padding: 0 0 0 22px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.method-block li::marker {
+  color: var(--gold);
+}
+
+.method-block hr {
+  margin: 14px 0 0;
+  border: 0;
+  border-top: 1px solid #d8e4e7;
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 32px 16px 48px;
+  }
+
+  #output {
+    gap: 18px;
+  }
+
+  .profile-section > p strong {
+    display: block;
+    min-width: 0;
+  }
+
+  .method-grid {
+    grid-template-columns: 1fr;
+  }
+}
